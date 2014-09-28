@@ -1,0 +1,2 @@
+angular-imx-colorpicker
+=======================
