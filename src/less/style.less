@@ -7,7 +7,7 @@
 .imx-input {
   position: relative;
   .imx-placeholder-text {
-    .animated(400ms);
+    .animated(600ms);
     position: absolute;
     top: 0px;
     left: 0px;
@@ -48,6 +48,7 @@
       font-size: @fontSize;
       height: @inputSize;
       box-sizing: border-box;
+      width: 100%;
       border: none;
       padding: 0 0 0 0;
       outline: none;
@@ -68,6 +69,9 @@
     .imx-input-wrapper {
       border-bottom: 2px @highlightColor solid;
     }
+    .imx-placeholder-text {
+      color: @highlightColor;
+    }
     &.imx-invalid {
       .imx-input-wrapper {
         border-bottom: 2px @errorColor solid;
@@ -79,4 +83,10 @@
   }
 
 
+}
+
+.imx-input-outer {
+  display: inline-block;
+  width: 300px;
+  margin-left: 10px;
 }
