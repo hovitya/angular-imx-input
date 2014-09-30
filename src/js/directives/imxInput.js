@@ -39,6 +39,15 @@ angular.module('imx.Input').directive('imxInput', ['$log', function ($log) {
                 scope.$digest();
             });
 
+            inputs.bind('input', function () {
+                if (inputs.val().length === 0) {
+                    scope.empty = true;
+                } else {
+                    scope.empty = false;
+                }
+                scope.$digest();
+            });
+
             var model = inputs.controller('ngModel');
             if (model) {
                 scope.model = model;

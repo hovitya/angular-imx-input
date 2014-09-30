@@ -65,10 +65,15 @@
       padding-top: 0px;
       font-size: @halfFontSize;
     }
-
+    .imx-input-wrapper {
+      border-bottom: 2px @highlightColor solid;
+    }
     &.imx-invalid {
       .imx-input-wrapper {
         border-bottom: 2px @errorColor solid;
+      }
+      .imx-placeholder-text {
+        color: @errorColor;
       }
     }
   }
