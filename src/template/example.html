@@ -9,13 +9,20 @@
     <title></title>
 </head>
 <body ng-controller="demoCtrl">
-    <imx-input ng-model="demo" label="Hello world" placeholder="Enter hello world"><input ng-model="demo" required></imx-input>
-    <imx-input ng-model="demo" label="Hello world" placeholder="May enter hello world"><input ng-model="demo"></imx-input>
-    <imx-input ng-model="demo" label="Value" placeholder="Enter value"><input ng-model="demo2"></imx-input>
+<input ng-model="data.demo">
+    <imx-input ng-model="demo" label="Hello world" placeholder="Enter hello world"><input ng-model="data.demo" required></imx-input>
+    <imx-input ng-model="demo" label="Hello world" placeholder="May enter hello world"><input ng-model="data.demo"></imx-input>
+    <imx-input ng-model="demo" label="Value" placeholder="Enter value"><input ng-model="data.demo2"></imx-input>
+    <div>
+        {{demo}}
+    </div>
     <script>
         angular.module('demoModule', ['imx.Input'])
                 .controller('demoCtrl', ['$scope', function ($scope) {
-                    $scope.demo2 = "value";
+                    $scope.data = {
+                        demo : "",
+                        demo2: "value"
+                    };
                 }]);
     </script>
 </body>

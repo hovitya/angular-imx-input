@@ -1,4 +1,4 @@
-angular.module('imx.Input').directive('imxInput', ['$log', function ($log) {
+angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', function ($log, $rootScope) {
     return {
         scope: {
             placeholder: '@',
@@ -31,26 +31,21 @@ angular.module('imx.Input').directive('imxInput', ['$log', function ($log) {
 
             inputs.bind('blur', function () {
                 scope.focus = false;
-                if (inputs.val().length === 0) {
-                    scope.empty = true;
-                } else {
-                    scope.empty = false;
-                }
+                scope.empty = inputs.val().length === 0;
                 scope.$digest();
             });
 
             inputs.bind('input', function () {
-                if (inputs.val().length === 0) {
-                    scope.empty = true;
-                } else {
-                    scope.empty = false;
-                }
-                scope.$digest();
+                scope.empty = inputs.val().length === 0;
+                $rootScope.$digest();
             });
 
             var model = inputs.controller('ngModel');
             if (model) {
                 scope.model = model;
+                model.$viewChangeListeners.push(function() {
+                    scope.empty = model.$.length === 0;
+                });
             } else {
                 $log.warn('Input model not found');
             }
