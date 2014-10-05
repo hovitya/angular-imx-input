@@ -13,7 +13,7 @@ angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', functio
         link: function (scope, iElement, iAttrs) {
             scope.focus = false;
             scope.empty = true;
-            //Look up ngModel
+
             var inputs = iElement.find('input');
             if (inputs.length > 1) {
                 $log.error("More than one input elements in one imxInput.");
@@ -40,14 +40,14 @@ angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', functio
                 $rootScope.$digest();
             });
 
-            var model = inputs.controller('ngModel');
-            if (model) {
-                scope.model = model;
-                model.$viewChangeListeners.push(function() {
-                    scope.empty = model.$.length === 0;
+            //Look up ngModel
+            var inputScope = inputs.scope();
+            if (inputScope) {
+                inputScope.$watch(inputs.attr('ng-model'), function(newValue) {
+                    scope.empty = (newValue === "" || newValue === undefined || newValue === null);
                 });
             } else {
-                $log.warn('Input model not found');
+                $log.warn('Input scope not found');
             }
 
         }

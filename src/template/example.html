@@ -10,9 +10,13 @@
 </head>
 <body ng-controller="demoCtrl">
 <input ng-model="data.demo">
-    <imx-input ng-model="demo" label="Hello world" placeholder="Enter hello world"><input ng-model="data.demo" required></imx-input>
-    <imx-input ng-model="demo" label="Hello world" placeholder="May enter hello world"><input ng-model="data.demo"></imx-input>
-    <imx-input ng-model="demo" label="Value" placeholder="Enter value"><input ng-model="data.demo2"></imx-input>
+    <imx-input-text ng-model="data.demo" placeholder="abc" label="def" required="required"></imx-input-text>
+<imx-select label="Gender" placeholder="Select your gender" ng-model="data.demo2" required>
+    <imx-option value="male">Male</imx-option>
+    <imx-option value="female">Female</imx-option>
+    <imx-option value="other">Other</imx-option>
+</imx-select>
+
     <div>
         {{demo}}
     </div>
@@ -21,7 +25,6 @@
                 .controller('demoCtrl', ['$scope', function ($scope) {
                     $scope.data = {
                         demo : "",
-                        demo2: "value"
                     };
                 }]);
     </script>
