@@ -7,6 +7,10 @@
 .imx-input {
   .animated(800ms);
   position: relative;
+  float: left;
+  width: 100%;
+  background-color: @backgroundColor;
+  
   .imx-placeholder-text {
     .animated(600ms);
     position: absolute;
@@ -64,6 +68,7 @@
 
 
   .imx-selected-item {
+    .animated(300ms);
     height: @inputSize;
     color: #000000;
     width: 100%;
@@ -107,6 +112,7 @@
 
   &.imx-focus {
     .imx-placeholder-text {
+      .animated(300px);
       padding-top: 0px;
       font-size: @halfFontSize;
     }
@@ -142,7 +148,15 @@
   }
 
   &.imx-open {
-    box-shadow: 4px 4px 7px 0px rgba(50, 50, 50, 0.5);
+    box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+    z-index: 9999;
+    .imx-placeholder-text {
+      padding-left: 10px;
+    }
+    .imx-selected-item {
+      padding-left: 10px;
+      padding-bottom: 5px;
+    }
   }
 
 }
@@ -153,4 +167,6 @@
   margin-left: 10px;
   margin-top: @elementMarginTop;
   margin-bottom: @elementMarginBottom;
+  height: @inputSize + @halfSize + @inputTopPadding + 7px;
+  overflow: visible;
 }
