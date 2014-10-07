@@ -1,58 +1,34 @@
 angular.module('imx.Input').directive('imxInputText', ['$log', '$rootScope', function ($log, $rootScope) {
     function postLink (scope, iElement, iAttrs, ngModel) {
-        /*        var input = angular.element("<input ng-model='data.value'>");
-         if(iAttrs.$attr['name']) {
-            input.attr('name', iAttrs.$attr['name']);
-        }
-
-        if(iAttrs.$attr['ngMinLength']) {
-            input.attr('ng-min-length', 'ngMinLength');
-        }
-
-        if(iAttrs.$attr['ngMaxLength']) {
-            input.attr('ng-max-length', 'ngMaxLength');
-        }
-
-        if(iAttrs.$attr['ngPattern']) {
-            input.attr('ng-pattern', 'ngPattern');
-        }
-
-        if(iAttrs.$attr['ngChange']) {
-            input.attr('ng-change', 'ngChange');
-        }
-
-        if(iAttrs.$attr['ngTrim']) {
-            input.attr('ng-trim', 'ngTrim');
-        }
-
-        if(iAttrs.$attr['ngRequired']) {
-            input.attr('ng-required', 'ngRequired');
-        }*/
-
         scope.data = {value: ""};
+
+        function updateLocalErrors(errors) {
+            var modelController = iElement.find('input').controller('ngModel');
+            for(var i in errors) {
+                if(errors.hasOwnProperty(i)) {
+                    modelController.$setValidity(i, !errors[i]);
+                }
+            }
+        }
+
         if (ngModel) {
             scope.$watch('data.value', function() {
                 ngModel.$setViewValue(scope.data.value);
+                updateLocalErrors(ngModel.$error);
             });
 
             ngModel.$render = function() {
                 scope.data.value = ngModel.$viewValue;
+                updateLocalErrors(ngModel.$error);
             };
         }
     }
-
 
     return {
         scope: {
             placeholder: '@',
             label: '@',
-            ngMinLength: '@',
-            ngMaxLength: '@',
-            ngPattern: '@',
-            ngChange: '&',
-            ngTrim: '@',
-            ngRequired: '@',
-            name: '@'
+            ngChange: '&'
         },
         require: "?ngModel",
         restrict: 'E',
@@ -62,11 +38,13 @@ angular.module('imx.Input').directive('imxInputText', ['$log', '$rootScope', fun
         },
         compile: function (tElement, tAttrs) {
             var type = "text";
-            if (tAttrs.$attr.type) {
-                type = tAttrs.$attr.type;
+            if (tAttrs.type) {
+                type = tAttrs.type;
             }
             tElement.find('input').attr("type", type);
-
+            if (tAttrs.required) {
+                tElement.find('input').attr("required", "required");
+            }
             return {
                 post: postLink
             };

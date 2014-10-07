@@ -11,16 +11,14 @@
 <body ng-controller="demoCtrl">
 <form name="myForm">
     <input ng-model="data.demo">
-    <imx-input-text ng-model="data.demo" placeholder="abc" label="def"></imx-input-text>
-    <imx-select label="Gender" placeholder="Select your gender" ng-model="data.demo2" required>
-        <imx-option value="male">Male</imx-option>
-        <imx-option value="female">Female</imx-option>
-        <imx-option value="other">Other</imx-option>
+    <imx-input-text ng-model="data.demo" type="password" placeholder="Enter password" label="Password"></imx-input-text>
+    <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender">
+        <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
     <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
     </form>
     <div>
-        {{myForm.tst.$valid}} {{myForm.$valid}}
+        {{myForm.gender}} {{myForm.$valid}}
     </div>
     <script>
         angular.module('demoModule', ['imx.Input'])
@@ -28,6 +26,12 @@
                     $scope.data = {
                         demo : ""
                     };
+
+                    $scope.genders = [
+                        {name: 'Male', code: 0},
+                        {name: 'Female', code: 1},
+                        {name: 'Other', code: 2}
+                    ];
                 }]);
     </script>
 </body>

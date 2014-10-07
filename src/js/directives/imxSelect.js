@@ -2,7 +2,8 @@ angular.module('imx.Input').directive('imxSelect', ['$log', '$rootScope', '$time
     return {
         scope: {
             placeholder: '@',
-            label: '@'
+            label: '@',
+            ngRequired: '@'
         },
         require: "?ngModel",
         restrict: 'E',
@@ -22,7 +23,6 @@ angular.module('imx.Input').directive('imxSelect', ['$log', '$rootScope', '$time
             };
         }],
         link: function (scope, iElement, iAttrs, ngModel) {
-
             var opened = false;
             iElement.bind('click', function() {
                 if(opened) return;
@@ -43,15 +43,25 @@ angular.module('imx.Input').directive('imxSelect', ['$log', '$rootScope', '$time
                 }
             });
 
+            function updateLocalErrors(errors) {
+                var modelController = iElement.find('input').controller('ngModel');
+                for(var i in errors) {
+                    if(errors.hasOwnProperty(i)) {
+                        modelController.$setValidity(i, !errors[i]);
+                    }
+                }
+            }
 
             scope.data = {value: ""};
             if (ngModel) {
                 scope.$watch('data.value', function() {
                     ngModel.$setViewValue(scope.data.value);
+                    updateLocalErrors(ngModel.$error);
                 });
 
                 ngModel.$render = function() {
                     scope.data.value = ngModel.$viewValue;
+                    updateLocalErrors(ngModel.$error);
                 };
             }
         }
@@ -70,13 +80,16 @@ angular.module('imx.Input').directive('imxOption',['$rootScope', function($rootS
                 return attrs.templateUrl || 'template/partials/inputOption.html';
             },
             link: function (scope, iElement, iAttrs, imxSelect) {
-                iElement.bind('click', function () {
+                function select() {
                     if(scope.value !== undefined) {
                         imxSelect.setValue(iElement, scope.value);
                     } else {
                         imxSelect.setValue(iElement, iElement.text());
                     }
+                }
 
+                iElement.bind('click', function () {
+                    select();
                     $rootScope.$digest();
                 });
             }
