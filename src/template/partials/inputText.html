@@ -1,5 +1,10 @@
 <div>
 <imx-input placeholder="{{ placeholder }}" label="{{ label }}">
-    <input ng-model="data.value">
+    <input ng-model="data.value"
+           ng-min-length="{{ngMinLength}}"
+           ng-max-length="{{ngMaxLength}}"
+           ng-trim="{{ngTrim}}"
+           ng-change="ngChange()"
+           ng-required="{{ngRequired}}">
 </imx-input>
 </div>

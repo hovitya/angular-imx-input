@@ -42,6 +42,7 @@ angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', functio
 
             //Look up ngModel
             var inputScope = inputs.scope();
+            scope.model = inputs.controller('ngModel');
             if (inputScope) {
                 inputScope.$watch(inputs.attr('ng-model'), function(newValue) {
                     scope.empty = (newValue === "" || newValue === undefined || newValue === null);

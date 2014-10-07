@@ -9,22 +9,24 @@
     <title></title>
 </head>
 <body ng-controller="demoCtrl">
-<input ng-model="data.demo">
-    <imx-input-text ng-model="data.demo" placeholder="abc" label="def" required="required"></imx-input-text>
-<imx-select label="Gender" placeholder="Select your gender" ng-model="data.demo2" required>
-    <imx-option value="male">Male</imx-option>
-    <imx-option value="female">Female</imx-option>
-    <imx-option value="other">Other</imx-option>
-</imx-select>
-<imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" required="required"></imx-input-text>
+<form name="myForm">
+    <input ng-model="data.demo">
+    <imx-input-text ng-model="data.demo" placeholder="abc" label="def"></imx-input-text>
+    <imx-select label="Gender" placeholder="Select your gender" ng-model="data.demo2" required>
+        <imx-option value="male">Male</imx-option>
+        <imx-option value="female">Female</imx-option>
+        <imx-option value="other">Other</imx-option>
+    </imx-select>
+    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
+    </form>
     <div>
-        {{demo}}
+        {{myForm.tst.$valid}} {{myForm.$valid}}
     </div>
     <script>
         angular.module('demoModule', ['imx.Input'])
                 .controller('demoCtrl', ['$scope', function ($scope) {
                     $scope.data = {
-                        demo : "",
+                        demo : ""
                     };
                 }]);
     </script>
