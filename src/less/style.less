@@ -57,7 +57,7 @@
       border: none;
       padding: 0 0 0 0;
       outline: none;
-      color: #000000;
+      color: @normalColor;
       background: none;
       margin: 0px 0px 0px 0px;
     }
@@ -75,6 +75,8 @@
     font-family: @fontFamily;
     font-size: @fontSize;
     cursor: pointer;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
     .imx-select-arrow {
       .animated(800ms);
       float: right;
@@ -94,6 +96,7 @@
     font-size: @fontSize;
     box-sizing: border-box;
     cursor: pointer;
+    text-overflow: ellipsis;
     padding: 5px @selectOptionPaddingRight 5px @selectOptionPaddingLeft;
     &:hover {
       color: @selectOptionColor;
