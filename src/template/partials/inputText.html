@@ -1,6 +1,6 @@
-<div>
-<imx-input placeholder="{{ placeholder }}" label="{{ label }}">
-    <input ng-model="data.value"
-           ng-change="ngChange()">
-</imx-input>
+<div class="imx-input-text-wrapper imx-input-main">
+    <imx-input placeholder="{{ placeholder }}" label="{{ label }}" ng-disabled="disabled">
+        <input ng-model="data.value"
+               ng-change="ngChange()">
+    </imx-input>
 </div>

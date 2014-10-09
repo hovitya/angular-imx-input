@@ -1,29 +1,4 @@
 angular.module('imx.Input').directive('imxInputText', ['$log', '$rootScope', function ($log, $rootScope) {
-    function postLink (scope, iElement, iAttrs, ngModel) {
-        scope.data = {value: ""};
-
-        function updateLocalErrors(errors) {
-            var modelController = iElement.find('input').controller('ngModel');
-            for(var i in errors) {
-                if(errors.hasOwnProperty(i)) {
-                    modelController.$setValidity(i, !errors[i]);
-                }
-            }
-        }
-
-        if (ngModel) {
-            scope.$watch('data.value', function() {
-                ngModel.$setViewValue(scope.data.value);
-                updateLocalErrors(ngModel.$error);
-            });
-
-            ngModel.$render = function() {
-                scope.data.value = ngModel.$viewValue;
-                updateLocalErrors(ngModel.$error);
-            };
-        }
-    }
-
     return {
         scope: {
             placeholder: '@',
@@ -46,7 +21,7 @@ angular.module('imx.Input').directive('imxInputText', ['$log', '$rootScope', fun
                 tElement.find('input').attr("required", "required");
             }
             return {
-                post: postLink
+                post: inputBase
             };
         }
     };

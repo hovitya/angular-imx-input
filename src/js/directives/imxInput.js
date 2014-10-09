@@ -13,6 +13,7 @@ angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', functio
         link: function (scope, iElement, iAttrs) {
             scope.focus = false;
             scope.empty = true;
+            scope.disabled = false;
 
             var inputs = iElement.find('input');
             if (inputs.length > 1) {
@@ -38,6 +39,16 @@ angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', functio
             inputs.bind('input', function () {
                 scope.empty = inputs.val().length === 0;
                 $rootScope.$digest();
+            });
+
+            iAttrs.$observe('disabled', function(newValue) {
+                if (newValue === "disabled" || newValue === true) {
+                    inputs.attr('disabled', true);
+                    scope.disabled = true;
+                } else {
+                    inputs.attr('disabled', false);
+                    scope.disabled = false;
+                }
             });
 
             //Look up ngModel

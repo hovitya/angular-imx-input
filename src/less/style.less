@@ -46,6 +46,13 @@
     }
   }
 
+  &.imx-disabled {
+    opacity: @disabledOpacity;
+    .imx-selected-item {
+      cursor: default;
+    }
+  }
+
   .imx-input-wrapper {
     .animated(300ms);
     input {
@@ -115,7 +122,7 @@
 
   &.imx-focus {
     .imx-placeholder-text {
-      .animated(300px);
+      .animated(300ms);
       padding-top: 0px;
       font-size: @halfFontSize;
     }
@@ -164,12 +171,16 @@
 
 }
 
-.imx-input-outer {
-  display: inline-block;
+.imx-input-main {
   width: 300px;
+  display: inline-block;
   margin-left: 10px;
   margin-top: @elementMarginTop;
   margin-bottom: @elementMarginBottom;
+  overflow: visible;
+}
+
+.imx-input-outer {
   height: @inputSize + @halfSize + @inputTopPadding + 7px;
   overflow: visible;
 }

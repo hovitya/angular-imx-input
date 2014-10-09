@@ -11,14 +11,15 @@
 <body ng-controller="demoCtrl">
 <form name="myForm">
     <input ng-model="data.demo">
-    <imx-input-text ng-model="data.demo" type="password" placeholder="Enter password" label="Password"></imx-input-text>
-    <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender">
+    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
+    <imx-input-text ng-model="data.demo" type="password" placeholder="Enter password" label="Password" ng-disabled="myForm.tst.$invalid"></imx-input-text>
+    <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
-    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
+
     </form>
     <div>
-        {{myForm.gender}} {{myForm.$valid}}
+        {{data.demo2}} {{myForm.$valid}}
     </div>
     <script>
         angular.module('demoModule', ['imx.Input'])
