@@ -2,7 +2,8 @@ angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', functio
     return {
         scope: {
             placeholder: '@',
-            label: '@'
+            label: '@',
+            format: '@'
         },
         restrict: 'E',
         transclude: true,

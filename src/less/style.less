@@ -33,25 +33,7 @@
     }
   }
 
-  &.imx-empty {
-    .imx-placeholder-text {
-      padding-top: @halfSize + @inputTopPadding;
-      font-size: @fontSize;
-      .imx-input-label {
-        display: none;
-      }
-      .imx-input-placeholder {
-        display: block;
-      }
-    }
-  }
 
-  &.imx-disabled {
-    opacity: @disabledOpacity;
-    .imx-selected-item {
-      cursor: default;
-    }
-  }
 
   .imx-input-wrapper {
     .animated(300ms);
@@ -70,7 +52,12 @@
     }
     padding-top: @halfSize + @inputTopPadding;
     padding-bottom: 5px;
-    border-bottom: 1px @fadedColor solid;
+    &.imx-no-line {
+      border-bottom: 1px @backgroundColor solid;
+    }
+    &:not(.imx-no-line) {
+      border-bottom: 1px @fadedColor solid;
+    }
   }
 
 
@@ -120,6 +107,26 @@
     }
   }
 
+  &.imx-empty {
+    .imx-placeholder-text {
+      padding-top: @halfSize + @inputTopPadding;
+      font-size: @fontSize;
+      .imx-input-label {
+        display: none;
+      }
+      .imx-input-placeholder {
+        display: block;
+      }
+    }
+  }
+
+  &.imx-disabled {
+    opacity: @disabledOpacity;
+    .imx-selected-item {
+      cursor: default;
+    }
+  }
+
   &.imx-focus {
     .imx-placeholder-text {
       .animated(300ms);
@@ -127,7 +134,12 @@
       font-size: @halfFontSize;
     }
     .imx-input-wrapper {
-      border-bottom: 2px @highlightColor solid;
+      &.imx-no-line {
+        border-bottom: 2px @backgroundColor solid;
+      }
+      &:not(.imx-no-line) {
+        border-bottom: 2px @highlightColor solid;
+      }
     }
     .imx-placeholder-text {
       color: @highlightColor;
@@ -145,7 +157,12 @@
 
     &.imx-invalid {
       .imx-input-wrapper {
-        border-bottom: 2px @errorColor solid;
+        &.imx-no-line {
+          border-bottom: 2px @backgroundColor solid;
+        }
+        &:not(.imx-no-line) {
+          border-bottom: 2px @errorColor solid;
+        }
       }
       .imx-placeholder-text {
         color: @errorColor;
@@ -178,9 +195,9 @@
   margin-top: @elementMarginTop;
   margin-bottom: @elementMarginBottom;
   overflow: visible;
+  height: @inputSize + @halfSize + @inputTopPadding + 7px;
 }
 
 .imx-input-outer {
-  height: @inputSize + @halfSize + @inputTopPadding + 7px;
   overflow: visible;
 }

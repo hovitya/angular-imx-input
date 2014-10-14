@@ -2,8 +2,7 @@ angular.module('imx.Input').directive('imxInputText', ['$log', '$rootScope', fun
     return {
         scope: {
             placeholder: '@',
-            label: '@',
-            ngChange: '&'
+            label: '@'
         },
         require: "?ngModel",
         restrict: 'E',

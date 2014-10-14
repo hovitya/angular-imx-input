@@ -14,12 +14,20 @@ angular.module('imx.Input').directive('imxSelect', ['$log', '$rootScope', '$time
         },
         controller: ['$scope', '$attrs', '$element', function($scope, $attrs, $element){
             this.setValue = function (htmlNode, value) {
-                var selectedContent = angular.element($element[0].querySelector('.imx-selected-item-content'));
-                selectedContent.empty();
-                selectedContent.html(htmlNode.html());
+                this.setContent(htmlNode);
                 $scope.data.value = value;
                 var optionsElement = angular.element($element[0].querySelector('.imx-options'));
                 optionsElement[0].blur();
+            };
+
+            this.setContent = function (htmlNode) {
+                var selectedContent = angular.element($element[0].querySelector('.imx-selected-item-content'));
+                selectedContent.empty();
+                selectedContent.html(htmlNode.html());
+            };
+
+            this.addChangeListener = function (listener) {
+                return $scope.$watch('data.value', listener);
             };
         }],
         link: function (scope, iElement, iAttrs, ngModel) {
@@ -61,13 +69,7 @@ angular.module('imx.Input').directive('imxOption',['$rootScope', function($rootS
                 return attrs.templateUrl || 'template/partials/inputOption.html';
             },
             link: function (scope, iElement, iAttrs, imxSelect) {
-                function select() {
-                    if(scope.value !== undefined) {
-                        imxSelect.setValue(iElement, scope.value);
-                    } else {
-                        imxSelect.setValue(iElement, iElement.text());
-                    }
-                }
+                var select = optionBase(scope, iElement, imxSelect, function() { return iElement; }, function() { return scope.value; });
 
                 iElement.bind('click', function () {
                     select();
