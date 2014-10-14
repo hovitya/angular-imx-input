@@ -57,13 +57,18 @@
       border: none;
       padding: 0 0 0 0;
       outline: none;
-      color: #000000;
+      color: @normalColor;
       background: none;
       margin: 0px 0px 0px 0px;
     }
     padding-top: @halfSize + @inputTopPadding;
     padding-bottom: 5px;
-    border-bottom: 1px @fadedColor solid;
+    &.imx-no-line {
+      border-bottom: 1px @backgroundColor solid;
+    }
+    &:not(.imx-no-line) {
+      border-bottom: 1px @fadedColor solid;
+    }
   }
 
 
@@ -75,6 +80,8 @@
     font-family: @fontFamily;
     font-size: @fontSize;
     cursor: pointer;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
     .imx-select-arrow {
       .animated(800ms);
       float: right;
@@ -94,6 +101,7 @@
     font-size: @fontSize;
     box-sizing: border-box;
     cursor: pointer;
+    text-overflow: ellipsis;
     padding: 5px @selectOptionPaddingRight 5px @selectOptionPaddingLeft;
     &:hover {
       color: @selectOptionColor;
@@ -110,6 +118,26 @@
     }
   }
 
+  &.imx-empty {
+    .imx-placeholder-text {
+      padding-top: @halfSize + @inputTopPadding;
+      font-size: @fontSize;
+      .imx-input-label {
+        display: none;
+      }
+      .imx-input-placeholder {
+        display: block;
+      }
+    }
+  }
+
+  &.imx-disabled {
+    opacity: @disabledOpacity;
+    .imx-selected-item {
+      cursor: default;
+    }
+  }
+
   &.imx-focus {
     .imx-placeholder-text {
       .animated(300px);
@@ -117,7 +145,12 @@
       font-size: @halfFontSize;
     }
     .imx-input-wrapper {
-      border-bottom: 2px @highlightColor solid;
+      &.imx-no-line {
+        border-bottom: 2px @backgroundColor solid;
+      }
+      &:not(.imx-no-line) {
+        border-bottom: 2px @highlightColor solid;
+      }
     }
     .imx-placeholder-text {
       color: @highlightColor;
@@ -135,7 +168,12 @@
 
     &.imx-invalid {
       .imx-input-wrapper {
-        border-bottom: 2px @errorColor solid;
+        &.imx-no-line {
+          border-bottom: 2px @backgroundColor solid;
+        }
+        &:not(.imx-no-line) {
+          border-bottom: 2px @errorColor solid;
+        }
       }
       .imx-placeholder-text {
         color: @errorColor;
@@ -148,7 +186,7 @@
   }
 
   &.imx-open {
-    box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.40);
+    box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
     z-index: 9999;
     .imx-placeholder-text {
       padding-left: 10px;
@@ -161,13 +199,17 @@
 
 }
 
-.imx-input-outer {
+.imx-input-main {
+  width: 300px;
   display: inline-block;
-  width: 100%;
   margin-left: 10px;
   margin-top: @elementMarginTop;
   margin-bottom: @elementMarginBottom;
+  overflow: visible;
   height: @inputSize + @halfSize + @inputTopPadding + 7px;
+}
+
+.imx-input-outer {
   overflow: visible;
   .imx-error {
     .animated(300ms);

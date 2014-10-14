@@ -14,21 +14,32 @@ angular.module('imx.Input').directive('imxSelect', ['$log', '$rootScope', '$time
         },
         controller: ['$scope', '$attrs', '$element', function($scope, $attrs, $element){
             this.setValue = function (htmlNode, value) {
-                var selectedContent = angular.element($element[0].querySelector('.imx-selected-item-content'));
-                selectedContent.empty();
-                selectedContent.html(htmlNode.html());
+                this.setContent(htmlNode);
                 $scope.data.value = value;
                 var optionsElement = angular.element($element[0].querySelector('.imx-options'));
                 optionsElement[0].blur();
             };
+
+            this.setContent = function (htmlNode) {
+                var selectedContent = angular.element($element[0].querySelector('.imx-selected-item-content'));
+                selectedContent.empty();
+                selectedContent.html(htmlNode.html());
+            };
+
+            this.addChangeListener = function (listener) {
+                return $scope.$watch('data.value', listener);
+            };
         }],
         link: function (scope, iElement, iAttrs, ngModel) {
+            inputBase(scope, iElement, iAttrs, ngModel);
+
             var opened = false;
             iElement.bind('click', function() {
                 if(opened) return;
-                opened = true;
                 var optionsElement = angular.element(iElement[0].querySelector('.imx-options'));
                 var inputElement = angular.element(iElement[0].querySelector('.imx-input'));
+                if (inputElement.hasClass('imx-disabled')) return;
+                opened = true;
                 inputElement.addClass('imx-open');
                 if(!inputElement.hasClass('imx-focus')){
                     inputElement.addClass("imx-focus");
@@ -42,28 +53,6 @@ angular.module('imx.Input').directive('imxSelect', ['$log', '$rootScope', '$time
                     });
                 }
             });
-
-            function updateLocalErrors(errors) {
-                var modelController = iElement.find('input').controller('ngModel');
-                for(var i in errors) {
-                    if(errors.hasOwnProperty(i)) {
-                        modelController.$setValidity(i, !errors[i]);
-                    }
-                }
-            }
-
-            scope.data = {value: ""};
-            if (ngModel) {
-                scope.$watch('data.value', function() {
-                    ngModel.$setViewValue(scope.data.value);
-                    updateLocalErrors(ngModel.$error);
-                });
-
-                ngModel.$render = function() {
-                    scope.data.value = ngModel.$viewValue;
-                    updateLocalErrors(ngModel.$error);
-                };
-            }
         }
     };
 }]);
@@ -80,13 +69,7 @@ angular.module('imx.Input').directive('imxOption',['$rootScope', function($rootS
                 return attrs.templateUrl || 'template/partials/inputOption.html';
             },
             link: function (scope, iElement, iAttrs, imxSelect) {
-                function select() {
-                    if(scope.value !== undefined) {
-                        imxSelect.setValue(iElement, scope.value);
-                    } else {
-                        imxSelect.setValue(iElement, iElement.text());
-                    }
-                }
+                var select = optionBase(scope, iElement, imxSelect, function() { return iElement; }, function() { return scope.value; });
 
                 iElement.bind('click', function () {
                     select();

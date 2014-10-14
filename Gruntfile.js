@@ -15,7 +15,8 @@ module.exports = function(grunt) {
                 src: ['src/template/partials/input.html',
                     'src/template/partials/inputText.html',
                     'src/template/partials/inputSelect.html',
-                    'src/template/partials/inputOption.html'],
+                    'src/template/partials/inputOption.html',
+                    'src/template/partials/inputSlider.html'],
                 dest: 'dist/templates.js'
             }
         },
@@ -95,6 +96,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-ngdocs');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('test', ['jshint']);
 

@@ -11,11 +11,17 @@
 <body ng-controller="demoCtrl">
 <form name="myForm">
     <input ng-model="data.demo">
-    <imx-input-text ng-model="data.demo" type="password" placeholder="Enter password" label="Password"></imx-input-text>
-    <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender">
+    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
+    <imx-input-text ng-model="data.demo" ng-change="alert('pass')" type="password" placeholder="Enter password" label="Password" ng-disabled="myForm.tst.$invalid"></imx-input-text>
+    <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
-    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
+    <imx-select label="Gender copy" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender_pre" ng-disabled="myForm.tst.$invalid">
+        <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
+    </imx-select>
+    <imx-select label="Gender preselected" placeholder="Select your gender" required="required" ng-model="data.demo3" name="gender_pre" ng-disabled="myForm.tst.$invalid">
+        <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
+    </imx-select>
     </form>
     <div>
         {{data.demo2}} {{myForm.$valid}}
@@ -23,15 +29,21 @@
     <script>
         angular.module('demoModule', ['imx.Input'])
                 .controller('demoCtrl', ['$scope', function ($scope) {
-                    $scope.data = {
-                        demo : ""
-                    };
-
                     $scope.genders = [
                         {name: 'Male', code: 0},
                         {name: 'Female', code: 1},
                         {name: 'Other', code: 2}
                     ];
+
+                    $scope.data = {
+                        demo : "",
+                        demo3: $scope.genders[1]
+                    };
+
+                    $scope.alert = function (param) {
+                        alert(param);
+                    }
+
                 }]);
     </script>
 </body>
