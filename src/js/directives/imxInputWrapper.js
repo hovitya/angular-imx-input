@@ -9,7 +9,7 @@ angular.module('imx.Input').directive('imxInputWrapper', ['$log', '$rootScope', 
         transclude: true,
         replace: true,
         templateUrl: function(elem,attrs) {
-            return attrs.templateUrl || 'template/partials/input.html';
+            return attrs.templateUrl || 'template/partials/inputWrapper.html';
         },
         link: function (scope, iElement, iAttrs) {
             scope.focus = false;

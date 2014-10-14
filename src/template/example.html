@@ -11,8 +11,8 @@
 <body ng-controller="demoCtrl">
 <form name="myForm">
     <input ng-model="data.demo">
-    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
-    <imx-input-text ng-model="data.demo" ng-change="alert('pass')" type="password" placeholder="Enter password" label="Password" ng-disabled="myForm.tst.$invalid"></imx-input-text>
+    <imx-input ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input>
+    <imx-input ng-model="data.demo" ng-change="alert('pass')" type="password" placeholder="Enter password" label="Password" ng-disabled="myForm.tst.$invalid"></imx-input>
     <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>

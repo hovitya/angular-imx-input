@@ -1,4 +1,4 @@
-angular.module('imx.Input').directive('imxInputText', ['$log', '$rootScope', function ($log, $rootScope) {
+angular.module('imx.Input').directive('imxInput', ['$log', '$rootScope', function ($log, $rootScope) {
     return {
         scope: {
             placeholder: '@',

@@ -1,10 +1,10 @@
 <div class="imx-input-select-wrapper imx-input-main">
-    <imx-input placeholder="{{ placeholder }}" label="{{ label }}" ng-disabled="disabled">
+    <imx-input-wrapper placeholder="{{ placeholder }}" label="{{ label }}" ng-disabled="disabled">
         <input ng-model="data.value" type="hidden">
         <div class="imx-selected-item">
             <span class="imx-selected-item-content"></span><span class="imx-select-arrow">&#9650;</span>
         </div>
         <div class="imx-options" ng-transclude tabindex="-1">
         </div>
-    </imx-input>
+    </imx-input-wrapper>
 </div>

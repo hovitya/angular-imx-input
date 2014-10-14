@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                 useStrict: true
             },
             main: {
-                src: ['src/template/partials/input.html',
+                src: ['src/template/partials/inputWrapper.html',
                     'src/template/partials/inputText.html',
                     'src/template/partials/inputSelect.html',
                     'src/template/partials/inputOption.html',
