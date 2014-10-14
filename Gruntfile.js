@@ -96,6 +96,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-ngdocs');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('test', ['jshint']);
 
