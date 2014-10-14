@@ -148,7 +148,7 @@
   }
 
   &.imx-open {
-    box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.40);
     z-index: 9999;
     .imx-placeholder-text {
       padding-left: 10px;
@@ -163,10 +163,27 @@
 
 .imx-input-outer {
   display: inline-block;
-  width: 300px;
+  width: 100%;
   margin-left: 10px;
   margin-top: @elementMarginTop;
   margin-bottom: @elementMarginBottom;
   height: @inputSize + @halfSize + @inputTopPadding + 7px;
   overflow: visible;
+  .imx-error {
+    .animated(300ms);
+    padding-top: 1px;
+    font-family: @fontFamily;
+    font-size: @halfFontSize;
+    color: @fadedColor;
+    position: relative;
+    float: left;
+    &.imx-show-error {
+      color: @errorColor;
+      padding-top: 0px;
+    }
+  }
+}
+
+.imx-container {
+  width: 300px;
 }

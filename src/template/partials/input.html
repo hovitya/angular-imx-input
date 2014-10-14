@@ -6,4 +6,7 @@
             <span class="imx-input-label">{{label}}</span>
         </div>
     </div>
+    <div class="imx-error" ng-class="{'imx-show-error': focus}" ng-show="model.$invalid">
+        This field is required
+    </div>
 </div>
