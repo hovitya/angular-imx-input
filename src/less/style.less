@@ -1,5 +1,7 @@
 @import "parameters.less";
 @import "functions.less";
+@import "slider.less";
+@import "sliderParameters.less";
 
 @halfSize: floor(@inputSize * 0.80);
 @halfFontSize: ceil(@fontSize * 0.80);
@@ -10,6 +12,8 @@
   float: left;
   width: 100%;
   background-color: @backgroundColor;
+
+
   
   .imx-placeholder-text {
     .animated(600ms);
@@ -201,3 +205,5 @@
 .imx-input-outer {
   overflow: visible;
 }
+
+.slider(@sliderLineColor, @sliderFadedLineColor, @sliderFadedLineColorLighten, @sliderButtonColor, @sliderButtonBorderColor, @sliderLineWidth, @sliderButtonLineWidth, @sliderHeight);
