@@ -1,3 +1,16 @@
 .animated(@length) {
   transition: all @length cubic-bezier(0.190, 1.000, 0.220, 1.000);
 }
+
+.circle(@radius) {
+  border-radius: @radius @radius @radius @radius;
+  width: @radius*2;
+  height: @radius*2;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.un-selectable() {
+  user-select: none;
+  cursor: default;
+}

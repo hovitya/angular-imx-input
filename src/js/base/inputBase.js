@@ -1,4 +1,4 @@
-function inputBase(scope, iElement, iAttrs, ngModel) {
+function inputBase(scope, iElement, iAttrs, ngModel, renderFn) {
     scope.data = {value: ""};
     scope.disabled = false;
 
@@ -23,6 +23,9 @@ function inputBase(scope, iElement, iAttrs, ngModel) {
 
         ngModel.$render = function() {
             scope.data.value = ngModel.$viewValue;
+            if (renderFn) {
+                renderFn(ngModel.$viewValue);
+            }
             updateLocalErrors(ngModel.$error);
         };
     }

@@ -1,5 +1,7 @@
 @import "parameters.less";
 @import "functions.less";
+@import "slider.less";
+@import "sliderParameters.less";
 
 @halfSize: floor(@inputSize * 0.80);
 @halfFontSize: ceil(@fontSize * 0.80);
@@ -45,6 +47,7 @@
       }
     }
   }
+
 
   .imx-input-wrapper {
     .animated(300ms);
@@ -141,7 +144,7 @@
 
   &.imx-focus {
     .imx-placeholder-text {
-      .animated(300px);
+      .animated(300ms);
       padding-top: 0px;
       font-size: @halfFontSize;
     }
@@ -234,3 +237,5 @@
 .imx-container {
   width: 300px;
 }
+
+.slider(@sliderLineColor, @sliderFadedLineColor, @sliderFadedLineColorLighten, @sliderButtonColor, @sliderButtonBorderColor, @sliderLineWidth, @sliderButtonLineWidth, @sliderHeight);

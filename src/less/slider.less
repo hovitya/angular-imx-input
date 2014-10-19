@@ -1,0 +1,39 @@
+@import "functions.less";
+
+.slider(@lineColor, @fadedLineColor, @fadedLineColorLighten, @buttonColor, @buttonBorderColor, @lineWidth, @buttonLineWidth, @height) {
+  .imx-slider-wrapper {
+    .imx-input-wrapper {
+      height: @height;
+      .un-selectable();
+      .imx-slider-button {
+        .animated(300ms);
+        .circle(ceil(@height/2));
+        border: @buttonLineWidth @buttonBorderColor solid;
+        background-color: @buttonColor;
+        position: relative;
+        top: floor((-1 * @height) / 2);
+        &:hover {
+          border-color: @lineColor;
+        }
+      }
+
+      .imx-slider-line {
+        border: none;
+        border-top: @lineWidth/2 @fadedLineColor solid;
+        background-color: @fadedLineColorLighten;
+        width: ~"calc(100% - @{height})";
+        height: @lineWidth;
+        box-sizing: border-box;
+        margin-top: ceil(@height/2 - @lineWidth/2);
+        margin-left: @height/2;
+        margin-right: @height/2;
+        overflow: hidden;
+        border-radius: @lineWidth;
+        .imx-slider-line-highlight {
+          //border: none;
+          //background-color: @lineColor;
+        }
+      }
+    }
+  }
+}

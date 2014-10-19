@@ -83,7 +83,7 @@ module.exports = function(grunt) {
             imxColorPicker: {
                 api: true,
                 src: ['src/js/*.js', 'src/js/**/*.js'],
-                title: 'IMX ColorPicker Documentation'
+                title: 'IMX Input Documentation'
             }
         }
     });

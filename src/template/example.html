@@ -11,8 +11,8 @@
 <body ng-controller="demoCtrl">
 <form name="myForm">
     <input ng-model="data.demo">
-    <imx-input ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input>
-    <imx-input ng-model="data.demo" ng-change="alert('pass')" type="password" placeholder="Enter password" label="Password" ng-disabled="myForm.tst.$invalid"></imx-input>
+    <imx-input-text ng-model="data.name" placeholder="Enter your name" label="Name" ng-required="true" name="tst"></imx-input-text>
+    <imx-input-text ng-model="data.demo" ng-change="alert('pass')" type="password" placeholder="Enter password" label="Password" ng-disabled="myForm.tst.$invalid"></imx-input-text>
     <imx-select label="Gender" placeholder="Select your gender" required="required" ng-model="data.demo2" name="gender" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
@@ -22,10 +22,10 @@
     <imx-select label="Gender preselected" placeholder="Select your gender" required="required" ng-model="data.demo3" name="gender_pre" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
-    <imx-slider ng-model="slider" label="Your age"></imx-slider>
+    <imx-slider ng-model="data.slValue"/>
     </form>
     <div>
-        {{data.demo2}} {{myForm.$valid}}  {{ slider }}
+        {{data.demo2}} {{myForm.$valid}}
     </div>
     <script>
         angular.module('demoModule', ['imx.Input'])
@@ -38,7 +38,8 @@
 
                     $scope.data = {
                         demo : "",
-                        demo3: $scope.genders[1]
+                        demo3: $scope.genders[1],
+                        slValue: 50
                     };
 
                     $scope.alert = function (param) {
