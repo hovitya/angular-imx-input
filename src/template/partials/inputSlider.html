@@ -1,7 +1,10 @@
 <div class="imx-slider-wrapper imx-input-main">
-    <imx-input label="{{ label }}" ng-disabled="disabled" format="no-line">
+    <imx-input-wrapper label="{{ label }}" ng-disabled="disabled" format="no-line">
         <input ng-model="data.value" type="hidden">
-        <div class="imx-slider-line"></div>
-        <div class="imx-slider-button"></div>
-    </imx-input>
+        <div class="imx-slider-content">
+            <div class="imx-slider-line"></div>
+            <div class="imx-slider-line-highlight" ng-style="{width:data.position}"></div>
+            <div class="imx-slider-button imx-animated" ng-style="{left:data.position}"></div>
+        </div>
+    </imx-input-wrapper>
 </div>

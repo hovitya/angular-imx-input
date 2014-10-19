@@ -3,35 +3,51 @@
 .slider(@lineColor, @fadedLineColor, @fadedLineColorLighten, @buttonColor, @buttonBorderColor, @lineWidth, @buttonLineWidth, @height) {
   .imx-slider-wrapper {
     .imx-input-wrapper {
-      height: @height;
-      .un-selectable();
-      .imx-slider-button {
-        .animated(300ms);
-        .circle(ceil(@height/2));
-        border: @buttonLineWidth @buttonBorderColor solid;
-        background-color: @buttonColor;
+      .imx-slider-content {
         position: relative;
-        top: floor((-1 * @height) / 2);
-        &:hover {
-          border-color: @lineColor;
-        }
-      }
 
-      .imx-slider-line {
-        border: none;
-        border-top: @lineWidth/2 @fadedLineColor solid;
-        background-color: @fadedLineColorLighten;
-        width: ~"calc(100% - @{height})";
-        height: @lineWidth;
-        box-sizing: border-box;
-        margin-top: ceil(@height/2 - @lineWidth/2);
-        margin-left: @height/2;
-        margin-right: @height/2;
-        overflow: hidden;
-        border-radius: @lineWidth;
+        height: @height;
+        .un-selectable();
+        .imx-slider-button {
+          .circle(ceil(@height/2));
+          border: @buttonLineWidth @buttonBorderColor solid;
+          background-color: @buttonColor;
+          position: relative;
+          top: floor((-1 * @height) / 2);
+          left: 0px;
+          &:hover {
+            border-color: @lineColor;
+          }
+          &.imx-animated {
+            .animated(300ms);
+          }
+        }
+
+        .imx-slider-line-common(@color1,@color2) {
+          border: none;
+          border-top: @lineWidth/2 @color1 solid;
+          background-color: @color2;
+          width: ~"calc(100% - @{height})";
+          height: @lineWidth;
+          box-sizing: border-box;
+          margin-left: @height/2;
+          margin-right: @height/2;
+          overflow: hidden;
+          border-radius: @lineWidth;
+        }
+
+        .imx-slider-line {
+          .imx-slider-line-common(@fadedLineColor, @fadedLineColorLighten);
+          margin-top: ceil(@height/2 - @lineWidth/2);
+          width: ~"calc(100% - @{height})";
+        }
+
         .imx-slider-line-highlight {
-          //border: none;
-          //background-color: @lineColor;
+          .imx-slider-line-common(@lineColor, @lineColor);
+          position: absolute;
+          margin-top: 0px;
+          top: 0px;
+          left: 0px;
         }
       }
     }
