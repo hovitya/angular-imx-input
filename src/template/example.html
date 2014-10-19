@@ -22,9 +22,10 @@
     <imx-select label="Gender preselected" placeholder="Select your gender" required="required" ng-model="data.demo3" name="gender_pre" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
+    <imx-slider ng-model="slider" label="Your age"></imx-slider>
     </form>
     <div>
-        {{data.demo2}} {{myForm.$valid}}
+        {{data.demo2}} {{myForm.$valid}}  {{ slider }}
     </div>
     <script>
         angular.module('demoModule', ['imx.Input'])
