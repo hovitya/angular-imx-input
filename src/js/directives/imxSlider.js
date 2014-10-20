@@ -1,4 +1,4 @@
-angular.module('imx.Input').directive('imxSlider', ['$log', '$rootScope', '$window', function ($log, $rootScope, $window) {
+angular.module('imx.Input').directive('imxSlider', ['$log', '$rootScope', '$window', '$timeout', function ($log, $rootScope, $window, $timeout) {
     function postLink(scope, iElement, iAttrs, ngModel) {
         inputBase(scope, iElement, iAttrs, ngModel, render);
         var windowElement = angular.element($window);
@@ -28,28 +28,35 @@ angular.module('imx.Input').directive('imxSlider', ['$log', '$rootScope', '$wind
             var width = elementSize.width;
             var percentage = value / parsedMax;
             scope.data.position = (width*percentage)+"px";
-            //jButton.css('left',scope.data.position);
         }
 
 
         function mouseDown(event) {
+            event.stopPropagation();
             lastCoord = event.pageX;
             isMoving = true;
             currentLeft = parseInt(jButton.css('left'));
             windowElement.bind('mouseup', mouseUp);
             windowElement.bind('mousemove', mouseMove);
             jButton.removeClass('imx-animated');
+            angular.element(iElement[0].querySelector(".imx-slider-line-highlight")).removeClass("imx-animated");
             startValue = ngModel.$viewValue;
         }
 
-        function mouseUp() {
-            isMoving = false;
+        function mouseUp(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            $timeout(function(){
+                isMoving = false;
+            }, 100);
             windowElement.unbind('mouseup', mouseUp);
             windowElement.unbind('mousemove', mouseMove);
             ngModel.$setViewValue(Math.round(startValue));
             jButton.addClass('imx-animated');
+            angular.element(iElement[0].querySelector(".imx-slider-line-highlight")).addClass("imx-animated");
             $rootScope.$digest();
         }
+
 
         function mouseMove(event) {
             var delta = event.pageX - lastCoord;
@@ -76,17 +83,30 @@ angular.module('imx.Input').directive('imxSlider', ['$log', '$rootScope', '$wind
             jButton = angular.element(iElement[0].querySelector('.imx-slider-button'));
             line = iElement[0].querySelector('.imx-slider-line');
             jButton.bind('mousedown', mouseDown);
-            console.log("attach");
         }
 
         function detach() {
             if(isMoving) return;
             jButton.unbind('mousedown', mouseDown);
-            console.log("detach");
         }
 
         iElement.bind('mouseover', attach);
         iElement.bind('mouseout', detach);
+        scope.contentClicked = function (event) {
+            if (isMoving) return;
+            var elementBox = iElement[0].getBoundingClientRect();
+            var position = event.pageX - elementBox.left;
+            var percent = position / elementBox.width;
+            var value = parsedMax * percent;
+            if (value > parsedMax) {
+                value = parsedMax;
+            } else if (value < parsedMin) {
+                value = parsedMin;
+            }
+            render(value);
+            ngModel.$setViewValue(Math.round(value));
+            $rootScope.$digest();
+        };
 
         //Handle min and max values
         scope.$watch('min', function(newMin) {
