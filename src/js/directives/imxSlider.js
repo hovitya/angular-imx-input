@@ -32,6 +32,8 @@ angular.module('imx.Input').directive('imxSlider', ['$log', '$rootScope', '$wind
 
 
         function mouseDown(event) {
+            var inputElement = angular.element(iElement[0].querySelector('.imx-input'));
+            if (inputElement.hasClass('imx-disabled')) return;
             event.stopPropagation();
             lastCoord = event.pageX;
             isMoving = true;
@@ -93,6 +95,8 @@ angular.module('imx.Input').directive('imxSlider', ['$log', '$rootScope', '$wind
         iElement.bind('mouseover', attach);
         iElement.bind('mouseout', detach);
         scope.contentClicked = function (event) {
+            var inputElement = angular.element(iElement[0].querySelector('.imx-input'));
+            if (inputElement.hasClass('imx-disabled')) return;
             if (isMoving) return;
             var elementBox = iElement[0].getBoundingClientRect();
             var position = event.pageX - elementBox.left;

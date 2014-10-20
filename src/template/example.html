@@ -24,8 +24,8 @@
     <imx-select label="Gender preselected" placeholder="Select your gender" required="required" ng-model="data.demo3" name="gender_pre" ng-disabled="myForm.tst.$invalid">
         <imx-option ng-repeat="gender in genders" value="gender">{{gender.name}}</imx-option>
     </imx-select>
-    <imx-slider ng-model="data.slValue" label="Standard slider"></imx-slider>
-    <imx-slider ng-model="data.slValue" auto-commit="true" label="Auto committed label"></imx-slider>
+    <imx-slider ng-model="data.slValue" label="Standard slider" ng-disabled="myForm.tst.$invalid"></imx-slider>
+    <imx-slider ng-model="data.slValue" auto-commit="true" label="Auto committed label" ng-disabled="myForm.tst.$invalid"></imx-slider>
     </form>
 
     <script>
